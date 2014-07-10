@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        template="/templates/default.xhtml">
+        <ui:define name="content">
+                <h:form id="watchform">
+                        <h:panelGrid columns="2">
+                                <f:facet name="header">#{msg.watchDell}</f:facet>
+                                <h:outputText value="#{msg.watchSerialNumber}" />
+                                <h:inputText id="serialNumber" value="#{watchF.watch.serialNumber}"
+                                        required="#{true}" />
+                        </h:panelGrid>
+
+                        <h:commandButton value="#{msg.watchFormOKButton}"
+                                action="#{watchF.deleteWatch}" />
+
+                        <h:panelGrid>
+                                <h:messages showDetail="#{true}" showSummary="#{false}" />
+                        </h:panelGrid>
+                </h:form>
+        </ui:define>
+</ui:composition>

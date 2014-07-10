@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<br />
+		<rich:extendedDataTable value="#{userF.allUsers}" var="user"
+			id="table" style="height:300px; width:205px;" selectionMode="none">
+			<f:facet name="header">
+				<h:outputText value="#{msg.users}" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.userId}" />
+				</f:facet>
+				<h:outputText value="#{user.id}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.userName}" />
+				</f:facet>
+				<h:outputText value="#{user.username}" />
+			</rich:column>
+		</rich:extendedDataTable>
+	</ui:define>
+</ui:composition>

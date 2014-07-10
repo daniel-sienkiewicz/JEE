@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h2>Really?</h2>
+		<h:form>
+			<h:commandButton action="#{userF.logout(session, request)}" value='YES'></h:commandButton>
+			<h:commandButton action="home?faces-redirect=true" value='NO'></h:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>

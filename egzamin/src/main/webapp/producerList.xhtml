@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<br />
+		<rich:extendedDataTable value="#{producerF.allProducer}"
+			var="producer" id="table" style="height:300px; width:205px;"
+			selectionMode="none">
+			<f:facet name="header">
+				<h:outputText value="#{msg.producerAllLabel}" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.producerName}" />
+				</f:facet>
+				<h:outputText value="#{producer.name}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.producerTown}" />
+				</f:facet>
+				<h:outputText value="#{producer.town}" />
+			</rich:column>
+		</rich:extendedDataTable>
+		<br />
+		<br />
+		<h:form>
+			<h:dataTable value="#{producerF.allProducer}" var="item">
+				<f:facet name="header">#{msg.producerAllLabel}</f:facet>
+				<h:column>
+					<f:facet name="header">#{msg.producerName}</f:facet>
+        #{item.name}
+      </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.action}</f:facet>
+					<h:commandButton value="#{msg.actionDelete}"
+						action="#{producerF.deleteProducer}" onclick="if (!confirm('Really?')) return false" />
+					<h:commandButton value="#{msg.actionUpdate}"
+						action="#{producerF.updateProducer(item.name)}" />
+
+				</h:column>
+
+			</h:dataTable>
+
+			<h:commandButton action="home?faces-redirect=true"
+				value='#{msg.watchFormBackButton}'></h:commandButton>
+
+			<h:commandButton action="searchProducer?faces-redirect=true"
+				value='#{msg.producerFormSearchButton}'></h:commandButton>
+
+			<h:commandButton action="addProducer?faces-redirect=true"
+				value='#{msg.producerFormAddButton}'></h:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>

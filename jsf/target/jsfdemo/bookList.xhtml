@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	
+	<ui:define name="content">
+	
+    <h:form>
+    
+     <h:dataTable value="#{bookF.allBooks}" var="item">
+      <f:facet name="header">Ksiazki</f:facet>
+      <h:column>
+      <f:facet name="header">Autor</f:facet>
+        #{item.tittle}
+      </h:column>
+      
+      <h:column>
+        <f:facet name="header">YOP</f:facet>
+        #{item.yop}
+      </h:column>
+      
+     </h:dataTable>
+     
+     <h:commandButton action="home?faces-redirect=true">Powrot</h:commandButton>
+     
+    </h:form>
+      
+	</ui:define>
+	
+</ui:composition>

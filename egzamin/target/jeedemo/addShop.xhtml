@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h:form id="shopform">
+			<h:panelGrid columns="2">
+				<f:facet name="header">#{msg.shopAdd}</f:facet>
+
+				<h:outputText value="#{msg.shopName}" />
+				<rich:inplaceInput value="#{shopF.shop.name}"
+					defaultLabel="#{msg.shopEnterName}" validator="#{shopF.shopName}"
+					required="#{true}">
+					<f:ajax execute="@this" render="messages pp" />
+				</rich:inplaceInput>
+
+				<h:outputText value="#{msg.shopTown}" />
+				<rich:inplaceInput value="#{shopF.shop.town}"
+					defaultLabel="#{msg.shopEnterTown}" required="#{true}">
+					<f:ajax execute="@this" render="messages pp" />
+				</rich:inplaceInput>
+
+				<h:outputText value="#{msg.shopStreet}" />
+				<rich:inplaceInput value="#{shopF.shop.street}"
+					defaultLabel="#{msg.shopEnterStreet}">
+					<f:ajax execute="@this" render="messages pp" />
+				</rich:inplaceInput>
+
+				<h:outputText value="#{msg.shopOwner}" />
+				<h:selectOneMenu value="#{shopF.ownerId}" required="#{true}">
+					<f:selectItems value="#{ownerF.allOwner}" var="owner"
+						itemValue="#{owner.id}" itemLabel="#{owner.name}" />
+					<f:ajax execute="@this" render="messages pp" />
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:commandButton value="#{msg.watchFormOKButton}"
+				action="#{shopF.addShop}" />
+
+
+			<rich:popupPanel id="pp" resizeable="true"
+				header="#{msg.watchSummation}">
+				<f:facet name="controls">
+					<h:outputLink value="#"
+						onclick="#{rich:component('pp')}.hide(); return false;">
+                X
+            </h:outputLink>
+				</f:facet>
+				<h:outputText value="#{msg.watchInsertedData}" />
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg.shopName}: " />
+					<h:outputText value="#{shopF.shop.name}" />
+					<h:outputText value="#{msg.shopTown}: " />
+					<h:outputText value="#{shopF.shop.town}" />
+					<h:outputText value="#{msg.shopStreet}: " />
+					<h:outputText value="#{shopF.shop.street}" />
+
+				</h:panelGrid>
+			</rich:popupPanel>
+
+			<h:commandButton value="#{msg.watchSummation}">
+				<rich:componentControl target="pp" operation="show">
+					<a4j:param noEscape="true" value="event" />
+					<rich:hashParam>
+						<f:param name="width" value="500" />
+						<f:param name="height" value="300" />
+						<f:param name="minWidth" value="300" />
+						<f:param name="minHeight" value="150" />
+						<a4j:param noEscape="true" name="left"
+							value="(jQuery(window).width()/2)-250" />
+						<a4j:param noEscape="true" name="top"
+							value="(jQuery(window).height()/2)-150" />
+					</rich:hashParam>
+				</rich:componentControl>
+			</h:commandButton>
+			<h:panelGrid>
+				<h:messages id="messages" showDetail="#{true}"
+					showSummary="#{false}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

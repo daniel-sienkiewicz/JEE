@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich">
+		
+	<h:outputStylesheet>
+        .cols {
+        vertical-align: top;
+        }
+    </h:outputStylesheet>
+    <div>
+    <h:form id="form">
+    <br />
+        <h:panelGrid columns="2" columnClasses="cols,cols" width="150">
+            <rich:panelMenu style="width:150px" itemMode="ajax" groupMode="ajax" groupExpandedLeftIcon="triangleUp"
+                groupCollapsedLeftIcon="triangleDown" topGroupExpandedRightIcon="chevronUp"
+                topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc" itemChangeListener="#{panelMenuBean.updateCurrent}">
+                <rich:panelMenuGroup label="#{msg.linkHome}" action="/home?faces-redirect=true" />
+                <rich:panelMenuGroup label="#{msg.watch}">
+                    <rich:panelMenuItem label="#{msg.watchAddLabel}" name="Item_1_1" action="/addWatch?faces-redirect=true" />
+                    <rich:panelMenuItem label="#{msg.watchSearchLabel}" name="Item_1_2" action="/searchWatch?faces-redirect=true" />
+                    <rich:panelMenuItem label="#{msg.watchAllLabel}" name="Item_1_3" action="/watchList?faces-redirect=true" />
+                </rich:panelMenuGroup>
+                <rich:panelMenuGroup label="#{msg.producer}">
+                    <rich:panelMenuItem label="#{msg.producerAddLabel}" name="Item_2_1" action="/addProducer?faces-redirect=true" />
+                    <rich:panelMenuItem label="#{msg.producerSearchLabel}" name="Item_2_2" action="/searchProducer?faces-redirect=true" />
+                    <rich:panelMenuItem label="#{msg.producerAllLabel}" name="Item_2_3" action="/producerList?faces-redirect=true" />
+                </rich:panelMenuGroup>
+                <rich:panelMenuGroup label="#{msg.shop}">
+                    <rich:panelMenuItem label="#{msg.shopAddLabel}" name="Item_3_1" action="/addShop?faces-redirect=true" />
+                    <rich:panelMenuItem label="#{msg.shopSearchLabel}" name="Item_3_2" action="/searchShop?faces-redirect=true" />
+                    <rich:panelMenuItem label="#{msg.shopAllLabel}" name="Item_3_3"  action="/shopList?faces-redirect=true" />
+                </rich:panelMenuGroup>
+                <rich:panelMenuGroup label="#{msg.owner}">
+                    <rich:panelMenuItem label="#{msg.ownerAddLabel}" name="Item_3_1" action="/addOwner?faces-redirect=true" />
+                    <rich:panelMenuItem label="#{msg.ownerSearchLabel}" name="Item_3_2" action="/searchOwner?faces-redirect=true" />
+                    <rich:panelMenuItem label="#{msg.ownerAllLabel}" name="Item_3_3"  action="/ownerList?faces-redirect=true" />
+                </rich:panelMenuGroup>
+                <rich:panelMenuGroup label="#{msg.user}">
+                    <rich:panelMenuItem label="#{msg.login}" name="Item_3_1" action="/login?faces-redirect=true" />
+                    <rich:panelMenuItem label="#{msg.logout}" name="Item_3_2" action="/logout?faces-redirect=true" />
+                    <rich:panelMenuGroup label="Admin">
+                        <rich:panelMenuItem label="Add user" name="Item_2_4_1" action="/admin/addUser?faces-redirect=true" />
+                        <rich:panelMenuItem label="Users list" name="Item_2_4_2" action="/admin/userList?faces-redirect=true" />
+                        <rich:panelMenuItem label="Secret" name="Item_2_4_2" action="/admin/secret?faces-redirect=true" />
+                    </rich:panelMenuGroup>
+                    <rich:panelMenuGroup label="Manager">
+                        <rich:panelMenuItem label="Users List" name="Item_2_4_1" action="/manager/userList?faces-redirect=true" />
+                        <rich:panelMenuItem label="Secret" name="Item_2_4_2" action="/manager/secret?faces-redirect=true" />
+                    </rich:panelMenuGroup>
+                    <rich:panelMenuGroup label="User">
+                        <rich:panelMenuItem label="Secret 1" name="Item_2_4_1" action="/user/secret1?faces-redirect=true" />
+                        <rich:panelMenuItem label="Secret 2" name="Item_2_4_2" action="/user/secret2?faces-redirect=true" />
+                    </rich:panelMenuGroup>
+                </rich:panelMenuGroup>
+                <rich:panelMenuGroup label="#{msg.gallery}" action="/gallery?faces-redirect=true" />
+                <rich:panelMenuGroup label="#{msg.autor}" action="/autor?faces-redirect=true" />
+                <h:outputText value ="#{request.remoteUser}"/>
+            </rich:panelMenu>
+            <a4j:outputPanel ajaxRendered="true">
+                <rich:panel rendered="#{not empty panelMenuBean.current}">
+                    <h:outputText value="#{panelMenuBean.current} selected" id="current" />
+                </rich:panel>
+            </a4j:outputPanel>
+        </h:panelGrid>
+    </h:form>
+	</div>
+</ui:composition>

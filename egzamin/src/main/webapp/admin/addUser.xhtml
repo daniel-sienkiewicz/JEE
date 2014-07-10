@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h:form id="producerform">
+			<h:panelGrid columns="2">
+				<f:facet name="header">Add User</f:facet>
+				<h:outputText value="User Name" />
+				<rich:inplaceInput value="#{userF.user.username}"
+					defaultLabel="Enter user name" validator="#{userF.userName}"
+					required="#{true}">
+					<f:ajax execute="@this" render="messages" />
+				</rich:inplaceInput>
+
+				<h:outputText value="Password" />
+				<h:inputSecret value='#{userF.user.password}' required="#{true}">
+					<f:ajax execute="@this" render="messages" />
+				</h:inputSecret>
+			</h:panelGrid>
+
+			<h:outputText value="Role" />
+			<h:selectOneRadio id="role" value="#{userF.role}">
+				<f:selectItem id="item1" itemLabel="Admin" itemValue="ADMIN" />
+				<f:selectItem id="item2" itemLabel="Manager" itemValue="MANAGER" />
+				<f:selectItem id="item3" itemLabel="User" itemValue="USER" />
+			</h:selectOneRadio>
+
+			<h:commandButton value="#{msg.watchFormOKButton}"
+				action="#{userF.addUser}" />
+
+			<h:panelGrid>
+				<h:messages id="messages" showDetail="#{true}"
+					showSummary="#{false}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

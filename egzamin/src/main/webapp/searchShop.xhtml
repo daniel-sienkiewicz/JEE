@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	<ui:define name="content">
+		<h:form id="watchform">
+			<h:panelGrid columns="2">
+				<f:facet name="header">#{msg.shopSearch}</f:facet>
+				<h:outputText value="#{msg.shopTown}" />
+				<h:inputText id="shop" value="#{shopF.town}" required="#{true}" />
+			</h:panelGrid>
+
+			<h:commandButton value="#{msg.watchFormOKButton}"
+				action="#{shopF.getSomeShop}" />
+			<br />
+			<br />
+			<br />
+			<rich:extendedDataTable value="#{shopF.SShop}" var="shop" id="table"
+				style="height:300px; width:405px;" selectionMode="none">
+				<f:facet name="header">
+					<h:outputText value="#{msg.shopAllLabel}" />
+				</f:facet>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg.shopName}" />
+					</f:facet>
+					<h:outputText value="#{shop.name}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg.shopTown}" />
+					</f:facet>
+					<h:outputText value="#{shop.town}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg.shopStreet}" />
+					</f:facet>
+					<h:outputText value="#{shop.street}" />
+				</rich:column>
+				<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.shopOwner}" />
+				</f:facet>
+				<h:outputText value="#{shop.owner.name}" />
+			</rich:column>
+			</rich:extendedDataTable>
+			<h:panelGrid>
+				<h:messages showDetail="#{true}" showSummary="#{false}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

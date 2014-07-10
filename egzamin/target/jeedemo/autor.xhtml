@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h:form id="authorForm">
+			<br />
+			<rich:progressBar mode="ajax" value="#{progressBarBean.currentValue}"
+				interval="500" id="pb" enabled="#{progressBarBean.enabled}"
+				minValue="0" maxValue="100">
+				<f:facet name="initial">
+					<br />
+					<rich:panel header="About author">
+						<center>
+							<h:graphicImage value="/gallery/javalogo.jpg" alt="pic"
+								width="360" />
+							<br />
+							<h2>
+								This project has been made ​​to pass "Java Enterprise
+								technologies". <br /> Author: Daniel Sienkiewicz <br /> Index
+								No.: 206358<br /> University of Gdańsk 2014
+							</h2>
+							<a href="https://github.com/henio180"><h:graphicImage
+									value="/gallery/github.jpg" alt="pic" width="80" /></a> <a
+								href="mailto:d.sienkiewicz@interia.eu"><h:graphicImage
+									value="/gallery/email.jpg" alt="pic" width="80" /></a>
+						</center>
+					</rich:panel>
+					<h2>
+						Would you like to explode this site:
+
+						<h:panelGroup>
+							<a4j:commandButton action="#{progressBarBean.startProcess}"
+								value="Start Process" execute="@form" render="pb"
+								rendered="#{progressBarBean.buttonRendered}"
+								style="margin: 9px 0px 5px;" />
+						</h:panelGroup>
+					</h2>
+				</f:facet>
+				<f:facet name="finish">
+					<h:panelGroup>
+						<center>
+							<h1>Buuuuuuuuuuum</h1>
+						</center>
+						<br />
+						<center>
+							<h:graphicImage value="/gallery/wybuch.jpg" alt="pic" width="400" />
+						</center>
+						<br />
+						<center>
+							<a4j:commandButton action="#{progressBarBean.startProcess}"
+								value="Restart Process" execute="@form" render="pb"
+								rendered="#{progressBarBean.buttonRendered}"
+								style="margin: 9px 0px 5px;" />
+						</center>
+					</h:panelGroup>
+				</f:facet>
+				<h:outputText value="#{progressBarBean.currentValue} %" />
+
+				<!-- Update the progress for each AJAX update -->
+				<a4j:ajax event="begin" listener="#{progressBarBean.increment}" />
+			</rich:progressBar>
+		</h:form>
+	</ui:define>
+</ui:composition>

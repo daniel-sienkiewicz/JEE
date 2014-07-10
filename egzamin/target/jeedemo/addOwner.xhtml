@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h:form id="ownerform">
+			<h:panelGrid columns="2">
+				<f:facet name="header">#{msg.ownerAdd}</f:facet>
+				<h:outputText value="#{msg.ownerName}" />
+				<rich:inplaceInput value="#{ownerF.owner.name}"
+					defaultLabel="#{msg.ownerEnterName}"
+					validator="#{ownerF.ownerName}" required="#{true}">
+					<f:ajax execute="@this" render="messages pp" />
+				</rich:inplaceInput>
+				<h:outputText value="#{msg.ownerSurname}" />
+				<rich:inplaceInput value="#{ownerF.owner.surname}"
+					defaultLabel="#{msg.ownerEnterSurname}">
+					<f:ajax execute="@this" render="messages pp" />
+				</rich:inplaceInput>
+			</h:panelGrid>
+
+			<rich:popupPanel id="pp" resizeable="true"
+				header="#{msg.watchSummation}">
+				<f:facet name="controls">
+					<h:outputLink value="#"
+						onclick="#{rich:component('pp')}.hide(); return false;">
+                X
+            </h:outputLink>
+				</f:facet>
+				<h:outputText value="#{msg.watchInsertedData}" />
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg.ownerName}: " />
+					<h:outputText value="#{ownerF.owner.name}" />
+					<h:outputText value="#{msg.ownerSurname}: " />
+					<h:outputText value="#{ownerF.owner.surname}" />
+				</h:panelGrid>
+			</rich:popupPanel>
+
+			<h:commandButton value="#{msg.watchSummation}">
+				<rich:componentControl target="pp" operation="show">
+					<a4j:param noEscape="true" value="event" />
+					<rich:hashParam>
+						<f:param name="width" value="500" />
+						<f:param name="height" value="300" />
+						<f:param name="minWidth" value="300" />
+						<f:param name="minHeight" value="150" />
+						<a4j:param noEscape="true" name="left"
+							value="(jQuery(window).width()/2)-250" />
+						<a4j:param noEscape="true" name="top"
+							value="(jQuery(window).height()/2)-150" />
+					</rich:hashParam>
+				</rich:componentControl>
+			</h:commandButton>
+
+			<h:commandButton value="#{msg.watchFormOKButton}"
+				action="#{ownerF.addOwner}" />
+
+			<h:panelGrid>
+				<h:messages id="messages" showDetail="#{true}"
+					showSummary="#{false}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

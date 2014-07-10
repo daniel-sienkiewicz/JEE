@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<br />
+		<rich:extendedDataTable value="#{userF.allUsers}" var="user"
+			id="table" style="height:300px; width:230px;" selectionMode="none">
+			<f:facet name="header">
+				<h:outputText value="#{msg.users}" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.userId}" />
+				</f:facet>
+				<h:outputText value="#{user.id}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.userName}" />
+				</f:facet>
+				<h:outputText value="#{user.username}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="Role" />
+				</f:facet>
+				<h:outputText value="#{userF.role(user.id)}" />
+			</rich:column>
+		</rich:extendedDataTable>
+
+		<h:form>
+
+			<h:dataTable value="#{userF.allUsers}" var="item">
+				<h:column>
+					<f:facet name="header">Login</f:facet>
+        #{item.username}
+      </h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.action}</f:facet>
+
+					<h:commandButton value="Delete"
+						action="#{userF.deleteUser}"
+						onclick="if (!confirm('Really?')) return false" />
+					<h:commandButton value="#{msg.actionUpdate}"
+						action="#{userF.updateUser}" />
+				</h:column>
+
+			</h:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+
+		<br />
+		<rich:extendedDataTable value="#{shopF.allShop}" var="shop" id="table"
+			style="height:300px; width:405px;" selectionMode="none">
+			<f:facet name="header">
+				<h:outputText value="#{msg.shopAllLabel}" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.shopName}" />
+				</f:facet>
+				<h:outputText value="#{shop.name}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.shopTown}" />
+				</f:facet>
+				<h:outputText value="#{shop.town}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.shopStreet}" />
+				</f:facet>
+				<h:outputText value="#{shop.street}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.shopOwner}" />
+				</f:facet>
+				<h:outputText value="#{shop.owner.name}" />
+			</rich:column>
+		</rich:extendedDataTable>
+		<br />
+		<br />
+		<h:form>
+			<h:dataTable value="#{shopF.allShop}" var="item">
+				<f:facet name="header">#{msg.shopAllLabel}</f:facet>
+				<h:column>
+					<f:facet name="header">#{msg.shopName}</f:facet>
+        #{item.name}
+      </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.action}</f:facet>
+					<h:commandButton value="#{msg.actionDelete}"
+						action="#{shopF.deleteShop}" onclick="if (!confirm('Really?')) return false" />
+					<h:commandButton value="#{msg.actionUpdate}"
+						action="#{shopF.updateShop(item.name)}" />
+				</h:column>
+
+			</h:dataTable>
+
+			<h:commandButton action="home?faces-redirect=true"
+				value='#{msg.shopFormBackButton}'></h:commandButton>
+
+			<h:commandButton action="searchShop?faces-redirect=true"
+				value='#{msg.shopFormSearchButton}'></h:commandButton>
+
+			<h:commandButton action="addShop?faces-redirect=true"
+				value='#{msg.shopFormAddButton}'></h:commandButton>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

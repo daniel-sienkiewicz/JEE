@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+
+		<br />
+		<rich:extendedDataTable value="#{ownerF.allOwner}" var="owner"
+			id="table" style="height:300px; width:205px;" selectionMode="none">
+			<f:facet name="header">
+				<h:outputText value="#{msg.ownerAllLabel}" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.ownerName}" />
+				</f:facet>
+				<h:outputText value="#{owner.name}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.ownerSurname}" />
+				</f:facet>
+				<h:outputText value="#{owner.surname}" />
+			</rich:column>
+		</rich:extendedDataTable>
+		<br />
+		<br />
+		<h:form>
+			<h:dataTable value="#{ownerF.allOwner}" var="item">
+				<f:facet name="header">#{msg.ownerAllLabel}</f:facet>
+				<h:column>
+					<f:facet name="header">#{msg.ownerName}</f:facet>
+        #{item.name}
+      </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.action}</f:facet>
+					<h:commandButton value="#{msg.actionDelete}"
+						action="#{ownerF.deleteOwner}" onclick="if (!confirm('Really?')) return false" />
+					<h:commandButton value="#{msg.actionUpdate}"
+						action="#{ownerF.updateOwner(item.name)}" />
+				</h:column>
+
+			</h:dataTable>
+
+			<h:commandButton action="home?faces-redirect=true"
+				value='#{msg.ownerFormBackButton}'></h:commandButton>
+
+			<h:commandButton action="searchOwner?faces-redirect=true"
+				value='#{msg.ownerFormSearchButton}'></h:commandButton>
+
+			<h:commandButton action="addOwner?faces-redirect=true"
+				value='#{msg.ownerFormAddButton}'></h:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>

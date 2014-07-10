@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	<ui:define name="content">
+		<h:form id="watchform">
+			<h:panelGrid columns="2">
+				<f:facet name="header">#{msg.ownerSearch}</f:facet>
+				<h:outputText value="#{msg.ownerName}" />
+				<h:inputText id="shop" value="#{ownerF.name}" required="#{true}" />
+			</h:panelGrid>
+
+			<h:commandButton value="#{msg.watchFormOKButton}"
+				action="#{ownerF.getSomeOwner}" />
+			<br />
+			<br />
+			<br />
+			<rich:extendedDataTable value="#{ownerF.SOwner}" var="owner"
+				id="table" style="height:300px; width:205px;" selectionMode="none">
+				<f:facet name="header">
+					<h:outputText value="#{msg.ownerAllLabel}" />
+				</f:facet>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg.ownerName}" />
+					</f:facet>
+					<h:outputText value="#{owner.name}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="#{msg.ownerSurname}" />
+					</f:facet>
+					<h:outputText value="#{owner.surname}" />
+				</rich:column>
+			</rich:extendedDataTable>
+			<h:panelGrid>
+				<h:messages showDetail="#{true}" showSummary="#{false}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+
+			<h:dataTable value="#{watchF.searchWatch}" var="item">
+				<f:facet name="header">#{msg.watch}</f:facet>
+				<h:column>
+					<f:facet name="header">#{msg.watchModel}</f:facet>
+        #{item.model}
+      </h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.watchProducer}</f:facet>
+        #{item.producer}
+      </h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.watchPrice}</f:facet>
+        #{item.price}
+      </h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.watchSerialNumber}</f:facet>
+        #{item.serialNumber}
+      </h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.watchStrapLength}</f:facet>
+        #{item.strapLength}
+        
+               <f:facet name="header">#{msg.watchDop}</f:facet>
+        #{item.dop}
+      </h:column>
+
+			</h:dataTable>
+
+			<h:commandButton action="home?faces-redirect=true"
+				value='#{msg.watchFormBackButton}'></h:commandButton>
+
+			<h:commandButton action="delWatch?faces-redirect=true"
+				value='#{msg.watchFormDelButton}'></h:commandButton>
+
+			<h:commandButton action="searchWatch?faces-redirect=true"
+				value='#{msg.watchFormSearchButton}'></h:commandButton>
+
+			<h:commandButton action="addWatch?faces-redirect=true"
+				value='#{msg.watchFormAddButton}'></h:commandButton>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

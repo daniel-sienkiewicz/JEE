@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h:form id="watchform">
+			<h:panelGrid columns="2">
+				<f:facet name="header">#{msg.watchAdd}</f:facet>
+				<h:outputText value="#{msg.watchModel}" />
+				<rich:inplaceInput value="#{watchF.watch.model}"
+					defaultLabel="#{msg.watchEnterModel}" >
+					<f:ajax execute="@this" render="messages pp" />
+					</rich:inplaceInput>
+
+				<h:outputText value="#{msg.watchProducer}" />
+				<rich:inplaceInput value="#{watchF.watch.producer}"
+					defaultLabel="#{msg.watchEnterProducer}">
+					<f:ajax execute="@this" render="messages pp" />
+				</rich:inplaceInput>
+
+				<h:outputText value="#{msg.watchPrice}" />
+				<rich:inputNumberSpinner value="#{watchF.watch.price}" step="1.5">
+					<f:validateDoubleRange minimum="20.5" maximum="150.5" />
+					<f:ajax execute="@this" render="messages pp" />
+				</rich:inputNumberSpinner>
+
+				<h:outputText value="#{msg.watchSerialNumber}" />
+				<h:inputText id="serialNumber" value="#{watchF.watch.serialNumber}"
+					validator="#{watchF.serialNumber}" required="#{true}">
+					<f:validator validatorId="serialNumberValidator" />
+					<f:ajax execute="@this" render="messages pp" />
+				</h:inputText>
+
+				<h:outputText value="#{msg.watchStrapLength}" />
+				<rich:inputNumberSlider value="#{watchF.watch.strapLength}"
+					width="500" maxValue="1000" step="8" showArrows="true"
+					showTooltip="false">
+					<f:ajax execute="@this" render="messages pp" />
+				</rich:inputNumberSlider>
+
+				<h:outputText value="#{msg.watchDop}" />
+				<rich:calendar value="#{watchF.watch.dop}" id="calendar"
+					datePattern="dd.MM.yyyy" showApplyButton="#{true}" cellWidth="24px"
+					cellHeight="22px" style="width:200px">
+					<a4j:ajax render="messages pp" execute="@this" />
+				</rich:calendar>
+			</h:panelGrid>
+
+			<h:commandButton value="#{msg.watchFormOKButton}"
+				action="#{watchF.addWatchA}" />
+
+			<h:panelGrid>
+				<h:messages id="messages" showDetail="#{true}"
+					showSummary="#{false}" />
+			</h:panelGrid>
+
+			<rich:popupPanel id="pp" resizeable="true" header="#{msg.watchSummation}">
+				<f:facet name="controls">
+					<h:outputLink value="#"
+						onclick="#{rich:component('pp')}.hide(); return false;">
+                X
+            </h:outputLink>
+				</f:facet>
+				<h:outputText value="#{msg.watchInsertedData}" />
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg.watchModel}: " />
+					<h:outputText value="#{watchF.watch.model}" />
+					<h:outputText value="#{msg.watchProducer}: " />
+					<h:outputText value="#{watchF.watch.producer}" />
+					<h:outputText value="#{msg.watchPrice}: " />
+					<h:outputText value="#{watchF.watch.price}" />
+					<h:outputText value="#{msg.watchSerialNumber}: " />
+					<h:outputText value="#{watchF.watch.serialNumber}" />
+					<h:outputText value="#{msg.watchStrapLength}: " />
+					<h:outputText value="#{watchF.watch.strapLength}" />
+					<h:outputText value="#{msg.watchDop}: " />
+					<h:outputText value="#{watchF.watch.dop}" />
+				</h:panelGrid>
+			</rich:popupPanel>
+
+			<h:commandButton value="#{msg.watchSummation}">
+				<rich:componentControl target="pp" operation="show">
+					<a4j:param noEscape="true" value="event" />
+					<rich:hashParam>
+						<f:param name="width" value="500" />
+						<f:param name="height" value="300" />
+						<f:param name="minWidth" value="300" />
+						<f:param name="minHeight" value="150" />
+						<a4j:param noEscape="true" name="left"
+							value="(jQuery(window).width()/2)-250" />
+						<a4j:param noEscape="true" name="top"
+							value="(jQuery(window).height()/2)-150" />
+					</rich:hashParam>
+				</rich:componentControl>
+			</h:commandButton>
+		</h:form>
+
+
+	</ui:define>
+
+
+
+</ui:composition>

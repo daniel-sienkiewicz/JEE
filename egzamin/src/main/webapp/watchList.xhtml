@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<br />
+		<rich:extendedDataTable value="#{watchF.allWatch}" var="watch"
+			id="table" style="height:300px; width:505px;" selectionMode="none">
+			<f:facet name="header">
+				<h:outputText value="#{msg.watchAllLabel}" />
+			</f:facet>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.watchModel}" />
+				</f:facet>
+				<h:outputText value="#{watch.model}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.watchPrice}" />
+				</f:facet>
+				<h:outputText value="#{watch.price}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.watchSerialNumber}" />
+				</f:facet>
+				<h:outputText value="#{watch.serialNumber}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.watchStrapLength}" />
+				</f:facet>
+				<h:outputText value="#{watch.strapLength}" />
+			</rich:column>
+			<rich:column>
+				<f:facet name="header">
+					<h:outputText value="#{msg.watchProducer}" />
+				</f:facet>
+				<h:outputText value="#{watch.producer.name}" />
+			</rich:column>
+		</rich:extendedDataTable>
+		<br />
+		<br />
+
+		<h:form>
+
+			<h:dataTable value="#{watchF.allWatch}" var="item">
+				<f:facet name="header">#{msg.watchAllLabel}</f:facet>
+				<h:column>
+					<f:facet name="header">#{msg.watchModel}</f:facet>
+        #{item.model}
+      </h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.watchSerialNumber}</f:facet>
+        #{item.serialNumber}
+      </h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.action}</f:facet>
+
+
+
+					<h:commandButton value="#{msg.actionDelete}"
+						action="#{watchF.deleteWatch}" onclick="if (!confirm('Really?')) return false" />
+					<h:commandButton value=" Details " action="#{watchF.showDetails}" />
+					<h:commandButton value="#{msg.actionUpdate}"
+						action="#{watchF.updateWatch(item.serialNumber)}" />
+				</h:column>
+
+			</h:dataTable>
+
+			<h:commandButton action="home?faces-redirect=true"
+				value='#{msg.watchFormBackButton}'></h:commandButton>
+
+			<h:commandButton action="searchWatch?faces-redirect=true"
+				value='#{msg.watchFormSearchButton}'></h:commandButton>
+
+			<h:commandButton action="addWatch?faces-redirect=true"
+				value='#{msg.watchFormAddButton}'></h:commandButton>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
